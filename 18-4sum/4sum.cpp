@@ -45,7 +45,7 @@ public:
 
                 j++;
 
-                while (j < n - 2 && nums[j] == nums[j - 1])
+                while (j < n  && nums[j] == nums[j - 1])
                     j++;
             }
         }
