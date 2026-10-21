@@ -28,11 +28,11 @@ public:
                     ans.push_back(node->val);
                 }
 
-                if(node->left != NULL) {
+                if(node->left) {
                     q.push(node->left);
                 }
 
-                if(node->right != NULL) {
+                if(node->right) {
                     q.push(node->right);
                 }
             }
