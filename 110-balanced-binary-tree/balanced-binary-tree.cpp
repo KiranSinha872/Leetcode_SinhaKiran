@@ -20,7 +20,7 @@ int check(TreeNode* root){
     if(L==-1)return -1;
 
     int R=check(root->right);
-      if(R==-1)return -1;
+    if(R==-1)return -1;
 
     if(abs(L-R)>1)return -1;
 
