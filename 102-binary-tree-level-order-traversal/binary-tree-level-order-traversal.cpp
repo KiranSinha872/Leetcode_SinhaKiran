@@ -1,38 +1,49 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
 class Solution {
 public:
-    vector<vector<int>> levelOrder(TreeNode* root) {
+ void levels(TreeNode* root,vector<vector<int>>&ans){
+    
+    queue<TreeNode*>q;
+    q.push(root);
 
-        vector<vector<int>> ans;
+    while(!q.empty()){
+        vector<int>level;
 
-        if(root == NULL)
-            return ans;
+        if(root==NULL)return;
 
-        queue<TreeNode*> q;
-        q.push(root);
+        int n=q.size();
+        for(int i=0;i<n;i++){
+             TreeNode* node=q.front();
+        q.pop();
+            level.push_back(node->val);
 
-        while(!q.empty()) {
-
-            int n = q.size();
-
-            vector<int> level;
-
-            for(int i = 0; i < n; i++) {
-
-                TreeNode* node = q.front();
-                q.pop();
-
-                level.push_back(node->val);
-
-                if(node->left)
-                    q.push(node->left);
-
-                if(node->right)
-                    q.push(node->right);
-            }
-
-            ans.push_back(level);
+            if(node->left)q.push(node->left);
+            if(node->right)q.push(node->right);
         }
 
-        return ans;
+        ans.push_back(level);
+
+
+    }
+
+ }
+
+
+
+vector<vector<int>> levelOrder(TreeNode* root) {
+    vector<vector<int>>ans;
+    levels(root,ans);
+    return ans;
+        
     }
 };
