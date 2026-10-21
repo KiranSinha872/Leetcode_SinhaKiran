@@ -10,40 +10,38 @@
  * };
  */
 class Solution {
-
 public:
 
-void levelOrder(TreeNode* root,vector<double>&ans){
-    if(root==NULL)return;
+void avg(TreeNode* root,vector<double> &ans){
 
+if(root==NULL)return;
     queue<TreeNode*>q;
     q.push(root);
-
     while(!q.empty()){
         int n=q.size();
-double sum=0;
-
+         double sum=0;
         for(int i=0;i<n;i++){
+
             TreeNode* node=q.front();
-            q.pop();
+        q.pop();
+            sum+=node->val;
 
-            sum += node->val;
-
-    
-            if (node->left) q.push(node->left);
-            if (node->right) q.push(node->right);
-
-
+            if(node->left)q.push(node->left);
+            if(node->right)q.push(node->right);
         }
+
         ans.push_back(sum/n);
+
     }
-
 }
-    vector<double> averageOfLevels(TreeNode* root) {
-        vector<double>ans;
-         levelOrder(root,ans);
 
-         return ans;
+
+
+
+    vector<double> averageOfLevels(TreeNode* root) {
+        vector<double> ans;
+        avg(root,ans);
+        return ans;
         
     }
 };
