@@ -10,30 +10,27 @@
 
 class Solution {
 public:
-    TreeNode* ans = NULL;
-
-    string postorder(TreeNode* root, TreeNode* p, TreeNode* q) {
-        string a = "NN";
-
-        if(root == NULL) return a;
-
-        string l = postorder(root->left, p, q);
-        string r = postorder(root->right, p, q);
-
-        if(l[0] == 'Y' || r[0] == 'Y' || root == p)
-            a[0] = 'Y';
-
-        if(l[1] == 'Y' || r[1] == 'Y' || root == q)
-            a[1] = 'Y';
-
-        if(a == "YY" && ans == NULL)
-            ans = root;
-
-        return a;
-    }
-
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
-        postorder(root, p, q);
-        return ans;
+         if (root == NULL || root == p || root == q) {
+            return root;
+        }
+
+        // Search left and right subtrees
+        TreeNode* left = lowestCommonAncestor(root->left, p, q);
+        TreeNode* right = lowestCommonAncestor(root->right, p, q);
+
+        // Both sides found a target
+        if (left != NULL && right != NULL) {
+            return root;
+        }
+
+        // Return whichever side found a target
+        if (left != NULL) {
+            return left;
+        }
+
+        return right;
     }
+        
+    
 };
